@@ -5,26 +5,37 @@ import com.typesafe.config.ConfigFactory;
 
 public class Configuration {
 
-    private String studentName;
-    private String type;
-    private String fileName;
+	private String studentName;
+	private String type;
+	private String fileName;
 
-    public Configuration() {
-        Config config = ConfigFactory.load();
-        this.studentName = config.getString("name");
-        this.studentName = config.getString("type");
-        this.studentName = config.getString("fileName");
-    }
+	// Instance of the Configuration Class
+	private static Configuration configurationInstance;
 
-    public String getStudentName() {
-        return studentName;
-    }
+	// Constructor of the Configuration Class
+	public Configuration() {
+		Config configuration = ConfigFactory.load();
+		this.studentName = configuration.getString("name");
+		this.type = configuration.getString("type");
+		this.fileName = configuration.getString("fileName");
+	}
 
-    public String getType() {
-        return type;
-    }
+	public static Configuration getInstance() {
+		if (configurationInstance == null) {
+			configurationInstance = new Configuration();
+		}
+		return configurationInstance;
+	}
 
-    public String getFileName() {
-        return fileName;
-    }
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
 }
